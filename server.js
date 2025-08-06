@@ -93,6 +93,16 @@ else if (req.url == '/login' && req.method == 'POST') {
     });
 }
 
+else if (req.url.startsWith('/products/filter/') && req.method === 'GET') {
+    const price =req.url.split('/')[3]; 
+    const filtered = productsList.filter(p => p.price <price);
+    res.end(JSON.stringify(filtered));
+  }
+
+ else if(req.url=='/namesSort'&&req.method=='GET') {
+    const sort=productsList.sort((a,b)=>a.name.localeCompare(b.name))
+    res.end(JSON.stringify(sort));
+ }
  })
 
  var port=4300;
@@ -100,4 +110,3 @@ else if (req.url == '/login' && req.method == 'POST') {
   console.log(`server running on http://localhost:${port}`);
 });
 
- 
